@@ -10,7 +10,7 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ## 📦 Tech Stack
 
-- 👤**Frontend:** HTML, Vanilla JS
+- 👤**Frontend:** HTML,CSS ,Vanilla JS
 - 🗄️**Backend:** Node.js + Express
 - 🧠**Temporal:** TypeScript SDK
 - 🌐**Database:** Simulated + [CrudCrud](https://crudcrud.com)
