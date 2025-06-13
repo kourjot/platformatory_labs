@@ -10,7 +10,7 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ## 📦 Tech Stack
 
-- 👤**Frontend:** HTML, Vanilla JS
+- 👤**Frontend:** HTML,CSS ,Vanilla JS
 - 🗄️**Backend:** Node.js + Express
 - 🧠**Temporal:** TypeScript SDK
 - 🌐**Database:** Simulated + [CrudCrud](https://crudcrud.com)
@@ -32,10 +32,13 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ## 🔧 Setup Instructions
 
-### 1️⃣ Clone the repo
+
 ```bash
+1️⃣ Clone the repo
+
 git clone https://github.com/kourjot/platformatory_labs.git
 cd platformatory_labs
+
 2️⃣ Start Temporal (Docker Compose)
 
 cd docker-compose
@@ -47,16 +50,12 @@ docker-compose up
 npm install
 
 4️⃣ Configure GitHub OAuth
+
 Visit: https://github.com/settings/developers
-
 Create a new OAuth App:
-
 Homepage: http://localhost:3001
-
 Callback URL: http://localhost:3001/auth/github/callback
-
 Paste the generated CLIENT_ID and CLIENT_SECRET into backend/app.js.
-
 const CLIENT_ID = 'your-client-id';
 const CLIENT_SECRET = 'your-client-secret';
 
@@ -79,7 +78,7 @@ node app.js
 
 8️⃣ Open Frontend in Browser
 
-http://localhost:3001/login.html
+http://127.0.0.1:5500/frontend/index.html
 
 📂 Folder Structure
 

@@ -18,18 +18,26 @@
       align-items: center;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+  .card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    width: 90%;
+  }
 
-    .card {
-      background: #fff;
-      padding: 40px 50px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      max-width: 450px;
-      width: 100%;
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: block;
     }
 
     h2 {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       color: #333;
       text-align: center;
     }
@@ -43,12 +51,14 @@
 
     input {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 18px;
+      padding: 8px;
+      margin-bottom: 14px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 15px;
     }
+    
+
 
     button {
       width: 100%;
@@ -60,6 +70,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: 0.3s;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -70,39 +81,92 @@
 <body>
 
   <div class="card">
+    <img id="profilePic" class="avatar" src="" alt="Profile Picture" />
+
     <h2>Profile Details</h2>
 
     <label>First Name:
-      <input type="text" id="firstName" />
+      <input type="text" id="firstName" disabled />
     </label>
 
     <label>Last Name:
-      <input type="text" id="lastName" />
+      <input type="text" id="lastName" disabled />
     </label>
 
     <label>Phone:
-      <input type="text" id="phone" />
+      <input type="text" id="phone" disabled />
     </label>
 
     <label>City:
-      <input type="text" id="city" />
+      <input type="text" id="city" disabled />
     </label>
 
     <label>Pincode:
-      <input type="text" id="pincode" />
+      <input type="text" id="pincode" disabled />
     </label>
 
-    <button onclick="saveProfile()">Save</button>
+    <button id="editBtn">Edit</button>
+    <button id="saveBtn" disabled onclick="saveProfile()">Save</button>
   </div>
 
   <script>
+    const API_URL = "https://crudcrud.com/api/2a7e4a1b19684888a78c1390d32fea0b/profile";
+
     function getQueryParams() {
       const params = {};
       window.location.search.substring(1).split("&").forEach(pair => {
         const [key, value] = pair.split("=");
-        params[decodeURIComponent(key)] = decodeURIComponent(value);
+        params[decodeURIComponent(key)] = decodeURIComponent(value || "");
       });
       return params;
+    }
+    function validateForm(data) {
+      if (!data.firstName.trim()) {
+        alert("First Name is required");
+        return false;
+      }
+
+      if (!data.lastName.trim()) {
+        alert("Last Name is required");
+        return false;
+      }
+
+      if (!/^\d{10}$/.test(data.phone)) {
+        alert("Enter a valid 10-digit phone number");
+        return false;
+      }
+
+      if (!data.city.trim()) {
+        alert("City is required");
+        return false;
+      }
+
+      if (!/^\d{6}$/.test(data.pincode)) {
+        alert("Enter a valid 6-digit pincode");
+        return false;
+      }
+
+  return true; // sab sahi hai
+}
+
+    async function loadUserIfExists(firstName, lastName) {
+      try {
+        const res = await fetch(API_URL);
+        console.log(res)
+        const users = await res.json();
+
+        const user = users.find(u => u.firstName === firstName && u.lastName === lastName);
+
+        if (user) {
+          document.getElementById("firstName").value = user.firstName || "";
+          document.getElementById("lastName").value = user.lastName || "";
+          document.getElementById("phone").value = user.phone || "";
+          document.getElementById("city").value = user.city || "";
+          document.getElementById("pincode").value = user.pincode || "";
+        }
+      } catch (err) {
+        console.error("Error loading user data:", err);
+      }
     }
 
     async function saveProfile() {
@@ -113,6 +177,9 @@
         city: document.getElementById("city").value,
         pincode: document.getElementById("pincode").value
       };
+       if (!validateForm(data)) {
+    return; 
+  }
 
       const res = await fetch("http://localhost:3001/update", {
         method: "POST",
@@ -122,11 +189,31 @@
 
       const result = await res.json();
       alert(result.msg);
+
+      toggleFields(true);
+      document.getElementById("saveBtn").disabled = true;
     }
 
+    function toggleFields(disable) {
+      document.querySelectorAll("input").forEach(input => {
+        input.disabled = disable;
+      });
+    }
+
+    document.getElementById("editBtn").addEventListener("click", () => {
+      toggleFields(false);
+      document.getElementById("saveBtn").disabled = false;
+    });
+
+    
     const params = getQueryParams();
     document.getElementById("firstName").value = params.name || "";
     document.getElementById("lastName").value = params.login || "";
+    document.getElementById("profilePic").src = params.avatar || "https://via.placeholder.com/100";
+
+    if (params.name && params.login) {
+      loadUserIfExists(params.name, params.login);
+    }
   </script>
 
 </body>
