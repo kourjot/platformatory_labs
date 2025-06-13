@@ -34,7 +34,7 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ### 1️⃣ Clone the repo
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
+git clone https://github.com/kourjot/platformatory_labs.git
 cd platformatory_labs
 2️⃣ Start Temporal (Docker Compose)
 
