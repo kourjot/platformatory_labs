@@ -17,7 +17,7 @@ const { saveToDatabase, sendToCrudCrud } = (0, workflow_1.proxyActivities)({
 function updateProfileWorkflow(data) {
     return __awaiter(this, void 0, void 0, function* () {
         yield saveToDatabase(data);
-        yield new Promise(resolve => setTimeout(resolve, 10000)); // 10 sec delay
+        yield new Promise(resolve => setTimeout(resolve, 10000));
         yield sendToCrudCrud(data);
     });
 }

@@ -18,12 +18,39 @@ function saveToDatabase(data) {
 }
 function sendToCrudCrud(data) {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("https://crudcrud.com/api/9e40e8f2835a4eb3b78053f3faf7ccdb/profile", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        });
-        const result = yield response.json();
-        console.log("Data sent to crudcrud:", result);
+        try {
+            const apiBase = "https://crudcrud.com/api/9e40e8f2835a4eb3b78053f3faf7ccdb/profile";
+            const getResponse = yield fetch(apiBase);
+            const users = yield getResponse.json();
+            const existingUser = users.find((user) => user.firstName === data.firstName &&
+                user.lastName === data.lastName &&
+                user.phone === data.phone);
+            if (existingUser && existingUser._id) {
+                const updateUrl = `${apiBase}/${existingUser._id}`;
+                const updateResponse = yield fetch(updateUrl, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (updateResponse.ok) {
+                    console.log(`User updated: ${existingUser._id}`);
+                }
+                else {
+                    console.error(" Update failed:", yield updateResponse.text());
+                }
+            }
+            else {
+                const createResponse = yield fetch(apiBase, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+                const result = yield createResponse.json();
+                console.log("New user created:", result);
+            }
+        }
+        catch (error) {
+            console.error(" Error in sendToCrudCrud:", error);
+        }
     });
 }
