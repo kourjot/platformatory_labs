@@ -32,6 +32,8 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ## 🔧 Setup Instructions
 
+### 🖥️ Login Page
+![image alt](https://github.com/kourjot/platformatory_labs/blob/main/Screenshot%202025-06-13%20214547.png?raw=true)
 
 ```bash
 1️⃣ Clone the repo
