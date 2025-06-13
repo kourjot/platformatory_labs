@@ -1,27 +1,100 @@
 # platformatory_labs
-# GitHub Login + Profile Update with Temporal
 
-This project allows users to **log in using GitHub OAuth**, view/edit their profile, and save their information using a **Temporal workflow** and send it to an external API (crudcrud).
+## 📂 Project Structure
+
+# 🧠 OIDC Profile Editor with Temporal (Node.js + TypeScript)
+
+This full-stack project allows users to log in via GitHub (OIDC), view and edit their profile (First Name, Last Name, Phone Number, City, Pincode), and uses **Temporal** to handle and persist the updates with a 10-second delay, sending the data to [CrudCrud](https://crudcrud.com).
+
+---
+
+## 📦 Tech Stack
+
+- 👤**Frontend:** HTML, Vanilla JS
+- 🗄️**Backend:** Node.js + Express
+- 🧠**Temporal:** TypeScript SDK
+- 🌐**Database:** Simulated + [CrudCrud](https://crudcrud.com)
+- 🔐**OIDC:** GitHub OAuth
+- 🐳**Containerization:** Docker + Docker Compose
+
+---
 
 ## 🚀 Features
 
-- 🔐 GitHub OAuth login
-- 👤 Profile form (First Name, Last Name, Phone, City, Pincode)
-- 🧠 Workflow powered by Temporal
-- 🌐 Data saved to `https://crudcrud.com`
-- 💻 Clean frontend UI using vanilla HTML + JS
+- GitHub OAuth login
+- Profile editing UI
+- Save updates via Temporal workflows
+- Delay of 10s before sending data to [CrudCrud](https://crudcrud.com)
+- TypeScript-based Temporal worker
+- Docker Compose setup for running Temporal locally
 
 ---
 
-## 🛠️ Tech Stack
+## 🔧 Setup Instructions
 
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js + Express
-- Orchestration: Temporal.io
-- External DB: [crudcrud.com](https://crudcrud.com) (mock API)
-- Docker: Temporal server running via docker-compose
+### 1️⃣ Clone the repo
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd platformatory_labs
+2️⃣ Start Temporal (Docker Compose)
 
----
+cd docker-compose
+docker-compose up
 
-## 📂 Project Structure
+3️⃣ Install Backend Dependencies
+  
+  cd backend
+npm install
+
+4️⃣ Configure GitHub OAuth
+Visit: https://github.com/settings/developers
+
+Create a new OAuth App:
+
+Homepage: http://localhost:3001
+
+Callback URL: http://localhost:3001/auth/github/callback
+
+Paste the generated CLIENT_ID and CLIENT_SECRET into backend/app.js.
+
+const CLIENT_ID = 'your-client-id';
+const CLIENT_SECRET = 'your-client-secret';
+
+
+5️⃣ Compile TypeScript Code
+
+If you’re only writing Temporal logic in TS:
+
+npx tsc
+backend/temporal/worker.ts ➝ dist/worker.js
+
+6️⃣ Run the Temporal Worker
+
+
+node dist/worker.js
+
+7️⃣ Run Backend Server
+
+node app.js
+
+8️⃣ Open Frontend in Browser
+
+http://localhost:3001/login.html
+
+📂 Folder Structure
+
+platformatory_labs/
+│
+├── backend/
+│   ├── app.js
+│   ├── tsconfig.json
+│   └── temporal/
+│       ├── activities.ts
+│       ├── workflows.ts
+│       └── worker.ts
+│
+├── frontend/
+│   ├── login.html
+│   └── profile.html
+│
 
