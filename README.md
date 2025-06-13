@@ -83,6 +83,7 @@ http://127.0.0.1:5500/frontend/index.html
 ## 🔥 Preview Screens
 
 ### 🖥️ Login Page
+<img src:"https://github.com/kourjot/platformatory_labs/issues/1#issue-3144171542">
 ![Login Page](https://github.com/kourjot/platformatory_labs/issues/1#issue-3144171542)
 
 ### 👤 Profile Editor
