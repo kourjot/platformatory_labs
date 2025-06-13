@@ -19,7 +19,7 @@ function saveToDatabase(data) {
 function sendToCrudCrud(data) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const apiBase = "https://crudcrud.com/api/9e40e8f2835a4eb3b78053f3faf7ccdb/profile";
+            const apiBase = "https://crudcrud.com/api/2a7e4a1b19684888a78c1390d32fea0b/profile";
             const getResponse = yield fetch(apiBase);
             const users = yield getResponse.json();
             const existingUser = users.find((user) => user.firstName === data.firstName &&
@@ -45,6 +45,14 @@ function sendToCrudCrud(data) {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
                 });
+                if (createResponse.ok) {
+                    const res = yield createResponse.json();
+                    console.log("New connection", res);
+                }
+                else {
+                    const errorText = yield createResponse.text();
+                    console.log("Create fail", errorText);
+                }
                 const result = yield createResponse.json();
                 console.log("New user created:", result);
             }

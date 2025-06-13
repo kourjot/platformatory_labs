@@ -55,7 +55,7 @@ app.get('/auth/github/callback', async (req, res) => {
   const userData = await userResponse.json();
 
   
-  res.redirect(`/profile.html?name=${encodeURIComponent(userData.name)}&login=${encodeURIComponent(userData.login)}`);
+  res.redirect(`/profile.html?name=${encodeURIComponent(userData.name)}&login=${encodeURIComponent(userData.login)}&avatar=${encodeURIComponent(userData.avatar_url)}`);
 });
 app.post('/update', async (req, res) => {
   const userData = req.body;
