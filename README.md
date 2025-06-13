@@ -34,7 +34,7 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 
 ```bash
-### 1️⃣ Clone the repo
+1️⃣ Clone the repo
 
 git clone https://github.com/kourjot/platformatory_labs.git
 cd platformatory_labs
