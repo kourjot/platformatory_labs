@@ -83,13 +83,13 @@ http://127.0.0.1:5500/frontend/index.html
 ## 🔥 Preview Screens
 
 ### 🖥️ Login Page
-![Login Page](frontend/screenshots/login.png)
+![Login Page](./frontend/screenshots/login.png)
 
 ### 👤 Profile Editor
-![Profile Page](frontend/screenshots/profile.png)
+![Profile Page](./frontend/screenshots/profile.png)
 
 ### 🧠 Temporal Worker in Action
-![Temporal Worker](frontend/screenshots/temporal-worker.png)
+![Temporal Worker](./frontend/screenshots/temporal-worker.png)
 
 
 📂 Folder Structure
