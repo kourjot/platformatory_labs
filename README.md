@@ -32,9 +32,6 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ## 🔧 Setup Instructions
 
-### 🖥️ Login Page
-![image alt](https://github.com/kourjot/platformatory_labs/blob/main/Screenshot%202025-06-13%20214547.png?raw=true)
-
 ```bash
 1️⃣ Clone the repo
 
@@ -88,17 +85,24 @@ node app.js
 
 http://127.0.0.1:5500/frontend/index.html
 
+
+
+
+
+```
 ## 🔥 Preview Screens
 
 ### 🖥️ Login Page
+
 ![image alt](https://github.com/kourjot/platformatory_labs/blob/main/Screenshot%202025-06-13%20214547.png?raw=true)
 
 ### 👤 Profile Editor
-![Profile Page](./frontend/screenshots/profile.png)
+
+![Profile Page](https://raw.githubusercontent.com/kourjot/platformatory_labs/de4a6765f6f2e5acf0f4ef4a80fffda1d35da9a5/Screenshot%202025-06-13%20214601.png)
 
 ### 🧠 Temporal Worker in Action
-![Temporal Worker](./frontend/screenshots/temporal-worker.png)
 
+![Temporal Worker](https://raw.githubusercontent.com/kourjot/platformatory_labs/860944063da86c8b2dda95bb2ab980c556a7ec80/Screenshot%202025-06-13%20214527.png)
 
 📂 Folder Structure
 
