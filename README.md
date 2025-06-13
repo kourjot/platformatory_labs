@@ -52,11 +52,17 @@ npm install
 4️⃣ Configure GitHub OAuth
 
 Visit: https://github.com/settings/developers
+
 Create a new OAuth App:
+
 Homepage: http://localhost:3001
+
 Callback URL: http://localhost:3001/auth/github/callback
+
 Paste the generated CLIENT_ID and CLIENT_SECRET into backend/app.js.
+
 const CLIENT_ID = 'your-client-id';
+
 const CLIENT_SECRET = 'your-client-secret';
 
 
