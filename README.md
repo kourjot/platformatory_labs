@@ -80,6 +80,18 @@ node app.js
 
 http://127.0.0.1:5500/frontend/index.html
 
+## 🔥 Preview Screens
+
+### 🖥️ Login Page
+![Login Page](screenshots/login.png)
+
+### 👤 Profile Editor
+![Profile Page](screenshots/profile.png)
+
+### 🧠 Temporal Worker in Action
+![Temporal Worker](screenshots/temporal-worker.png)
+
+
 📂 Folder Structure
 
 platformatory_labs/
@@ -95,5 +107,5 @@ platformatory_labs/
 ├── frontend/
 │   ├── login.html
 │   └── profile.html
-│
+
 
