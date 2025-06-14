@@ -122,6 +122,10 @@ http://127.0.0.1:5500/frontend/index.html
 
 ![Temporal Worker](https://raw.githubusercontent.com/kourjot/platformatory_labs/860944063da86c8b2dda95bb2ab980c556a7ec80/Screenshot%202025-06-13%20214527.png)
 
+### 🔄 Temporal Workflow Executing a Profile Update
+
+![Temporal Workflow Screenshot](https://github.com/kourjot/platformatory_labs/blob/main/Screenshot%202025-06-14%20114636.png?raw=true)
+
 📂 Folder Structure
 
 platformatory_labs/
