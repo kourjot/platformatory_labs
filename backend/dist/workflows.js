@@ -11,13 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateProfileWorkflow = updateProfileWorkflow;
 const workflow_1 = require("@temporalio/workflow");
-const { saveToDatabase, sendToCrudCrud } = (0, workflow_1.proxyActivities)({
+const workflow_2 = require("@temporalio/workflow");
+const { saveToDatabase, sendToCrudCrud, savetoMongoDb } = (0, workflow_1.proxyActivities)({
     startToCloseTimeout: '10s',
 });
 function updateProfileWorkflow(data) {
     return __awaiter(this, void 0, void 0, function* () {
         yield saveToDatabase(data);
-        yield new Promise(resolve => setTimeout(resolve, 10000));
+        yield (0, workflow_2.sleep)(10000);
         yield sendToCrudCrud(data);
+        yield savetoMongoDb(data);
+        console.log("Workflow completed successfully");
     });
 }

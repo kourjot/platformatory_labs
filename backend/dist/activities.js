@@ -10,34 +10,66 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveToDatabase = saveToDatabase;
+exports.savetoMongoDb = savetoMongoDb;
 exports.sendToCrudCrud = sendToCrudCrud;
+const { Profile } = require("../model/profile.js");
+const { connection } = require("../db.js");
 function saveToDatabase(data) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("Saving to DB (simulated):", data);
     });
 }
+function savetoMongoDb(data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield connection();
+            const existingUser = yield Profile.findOne({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                phone: data.phone
+            });
+            if (existingUser) {
+                yield Profile.updateOne({ _id: existingUser._id }, data);
+                console.log(existingUser._id);
+            }
+            else {
+                const newProfile = new Profile(data);
+                yield newProfile.save();
+                console.log(newProfile._id);
+            }
+        }
+        catch (err) {
+            console.log("Error in data save in mongoDB", err);
+        }
+    });
+}
 function sendToCrudCrud(data) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const apiBase = "https://crudcrud.com/api/2a7e4a1b19684888a78c1390d32fea0b/profile";
+            const apiBase = "https://crudcrud.com/api/f07cb3b251284854b33b000edb8b1a65/profile";
+            // const arr=[];
             const getResponse = yield fetch(apiBase);
+            if (!getResponse.ok) {
+                const text = yield getResponse.text();
+                console.log(text);
+            }
             const users = yield getResponse.json();
             const existingUser = users.find((user) => user.firstName === data.firstName &&
                 user.lastName === data.lastName &&
                 user.phone === data.phone);
             if (existingUser && existingUser._id) {
                 const updateUrl = `${apiBase}/${existingUser._id}`;
+                console.log(updateUrl);
                 const updateResponse = yield fetch(updateUrl, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 });
-                if (updateResponse.ok) {
-                    console.log(`User updated: ${existingUser._id}`);
+                if (!updateResponse.ok) {
+                    const errText = yield updateResponse.text();
+                    console.log(errText);
                 }
-                else {
-                    console.error(" Update failed:", yield updateResponse.text());
-                }
+                console.log("User updated:", existingUser._id);
             }
             else {
                 const createResponse = yield fetch(apiBase, {
@@ -45,13 +77,9 @@ function sendToCrudCrud(data) {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
                 });
-                if (createResponse.ok) {
-                    const res = yield createResponse.json();
-                    console.log("New connection", res);
-                }
-                else {
+                if (!createResponse.ok) {
                     const errorText = yield createResponse.text();
-                    console.log("Create fail", errorText);
+                    console.log("Create failed:", errorText);
                 }
                 const result = yield createResponse.json();
                 console.log("New user created:", result);
