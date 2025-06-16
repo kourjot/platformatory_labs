@@ -32,6 +32,20 @@ This full-stack project allows users to log in via GitHub (OIDC), view and edit 
 
 ## 🔧 Setup Instructions
 
+## ⚙️ Temporal Setup using Docker Compose
+
+
+This project uses [Temporal.io](https://temporal.io/) for handling asynchronous workflows with delays, retries, and activity scheduling.
+
+I use the official Docker images provided by Temporal via DockerHub.
+
+## 🧱 Prerequisites
+
+- Docker installed on our system
+- Docker Compose installed
+- Node.js and npm installed (for worker/client)
+
+
 ```bash
 1️⃣ Clone the repo
 
@@ -40,12 +54,16 @@ cd platformatory_labs
 
 2️⃣ Start Temporal (Docker Compose)
 
+Navigate into the docker-compose folder:
+
+powershell
+
 cd docker-compose
 docker-compose up
 
-3️⃣ Install Backend Dependencies
+3️⃣ Install Backend Dependencies 
   
-  cd backend
+cd backend
 npm install
 
 4️⃣ Configure GitHub OAuth
@@ -103,6 +121,10 @@ http://127.0.0.1:5500/frontend/index.html
 ### 🧠 Temporal Worker in Action
 
 ![Temporal Worker](https://raw.githubusercontent.com/kourjot/platformatory_labs/860944063da86c8b2dda95bb2ab980c556a7ec80/Screenshot%202025-06-13%20214527.png)
+
+### 🔄 Temporal Workflow Executing a Profile Update
+
+![Temporal Workflow Screenshot](https://github.com/kourjot/platformatory_labs/blob/main/Screenshot%202025-06-14%20114636.png?raw=true)
 
 📂 Folder Structure
 
